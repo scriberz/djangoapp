@@ -1,0 +1,20 @@
+<ul>
+    {% for item, children in menu.items %}
+        <li>
+            <a href="{{ item.get_absolute_url }}" class="{% if item == active_item %}active{% endif %}">
+                {{ item.name }}
+            </a>
+            {% if item == active_item or (active_item and item in active_item.get_ancestors) %}
+                <ul>
+                    {% for child in children %}
+                        <li>
+                            <a href="{{ child.get_absolute_url }}" class="{% if child == active_item %}active{% endif %}">
+                                {{ child.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
